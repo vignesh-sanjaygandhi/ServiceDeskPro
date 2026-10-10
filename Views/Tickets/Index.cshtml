@@ -1,0 +1,38 @@
+@model IEnumerable<ServiceDeskPro.Models.Ticket>
+@{ ViewData["Title"] = "IT Support Dashboard"; }
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>IT Support Dashboard</h2>
+        <a href="/Tickets/Create" class="btn btn-primary">➕ Create New Ticket</a>
+    </div>
+    
+    <div class="card shadow-sm">
+        <table class="table table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Ticket Details</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var t in Model) {
+                    <tr>
+                        <td><strong>#@t.Id</strong></td>
+                        <td>
+                            <strong>@t.Title</strong><br/>
+                            <small class="text-muted">@t.Description</small>
+                        </td>
+                        <td><span class="badge bg-warning text-dark">@t.Priority</span></td>
+                        <td><span class="badge bg-success">@t.Status</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if(!Model.Any()) {
+            <div class="p-4 text-center text-muted">No tickets found. Create one to get started!</div>
+        }
+    </div>
+</div>
